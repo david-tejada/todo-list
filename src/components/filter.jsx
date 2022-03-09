@@ -23,6 +23,7 @@ export default class Filter extends React.Component {
           id="filterAll"
           name="filter"
           value="all"
+          checked={this.props.activeFilter === "all"}
           onChange={this.handleChange}
         />
         <label htmlFor="filterAll">All</label>
