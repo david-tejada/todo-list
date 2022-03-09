@@ -1,31 +1,33 @@
-import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
-import { v4 as uuidv4 } from "uuid";
-
+import { shallow, configure } from "enzyme";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import Todo from "./todo";
 
-let container = null;
-const todo = {
-  content: "This is a test",
-  id: uuidv4(),
+configure({ adapter: new Adapter() });
+
+const pendingTodo = {
+  content: "This is a pending todo",
+  id: "25fac6bd-da12-48c8-b76b-74612c09e4bd",
   completed: false,
 };
 
-beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
+const completedTodo = {
+  content: "This is a completed todo",
+  id: "25fac6bd-da12-48c8-b76b-74617c09e4bd",
+  completed: true,
+};
+
+it("renders the todo item", () => {
+  const wrapper = shallow(<Todo todo={pendingTodo} />);
+  expect(wrapper.find("#completed").prop("checked")).toBe(false);
+  expect(wrapper.find("#completed").prop("todo")).toBe(pendingTodo);
 });
 
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
+it("renders the pending todo list item with the right class", () => {
+  const wrapper = shallow(<Todo todo={pendingTodo} />);
+  expect(wrapper.find("li").prop("className")).toBe("todo");
 });
 
-it("render the todo item", () => {
-  act(() => {
-    render(<Todo todo={todo} />, container);
-  });
-  expect(container.textContent).toBe("This is a test✎");
+it("renders the completed todo list item with the right class", () => {
+  const wrapper = shallow(<Todo todo={completedTodo} />);
+  expect(wrapper.find("li").prop("className")).toBe("todo todo-completed");
 });
