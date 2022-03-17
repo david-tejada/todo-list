@@ -39,10 +39,7 @@ export default class FilterableTodoList extends React.Component {
     return (
       <div>
         <NewTodo onNewTodo={this.addTodo} />
-        <TodoList
-          todos={this.state.todos}
-          onCheckChange={this.handleCheckChange}
-        />
+        <TodoList todos={this.state.todos} onCheck={this.handleCheckChange} />
       </div>
     );
   }
