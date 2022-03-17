@@ -1,25 +1,23 @@
 import React from "react";
 
-export default function Todo(props) {
-  const todo = props.todo;
-  function handleChange(e) {
-    props.onTodoCheckChange(todo);
-  }
-
-  const className = todo.completed ? "todo todo-completed" : "todo";
+export default function Todo({ todo, onCheck }) {
+  const { completed, id } = todo;
+  const className = completed ? "todo todo-completed" : "todo";
   return (
-    <>
-      <li className={className} data-testid="todo-item">
+    <li className={className}>
+      <label htmlFor="completed">
         <input
           type="checkbox"
           id="completed"
           todo={todo}
-          checked={todo.completed}
-          onChange={handleChange}
+          checked={completed}
+          onChange={() => {
+            onCheck(todo);
+          }}
         />
-        <label htmlFor="completed">{todo.content}</label>
-        <button>✎</button>
-      </li>
-    </>
+        {todo.content}
+      </label>
+      <button>edit</button>
+    </li>
   );
 }

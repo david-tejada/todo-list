@@ -1,25 +1,50 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 
 import Todo from "./todo";
 
+afterEach(cleanup);
+
 const pendingTodo = {
-  content: "This is a pending todo",
-  id: "25fac6bd-da12-48c8-b76b-74612c09e4bd",
+  content: "Pending todo",
+  id: "7cp",
   completed: false,
 };
 
 const completedTodo = {
-  content: "This is a completed todo",
-  id: "25fac6bd-da12-48c8-b76b-74617c09e4bd",
+  content: "Completed todo",
+  id: "fg8",
   completed: true,
 };
 
-it("renders the todo item with the right text", () => {
-  render(<Todo todo={pendingTodo} />);
-  screen.debug();
-  expect(screen.getByTestId("todo-item")).toHaveTextContent(
-    "This is a pending todo"
+const onCheck = jest.fn();
+
+test("Pending <Todo />", () => {
+  const { getByRole, getByText } = render(
+    <Todo todo={pendingTodo} onCheck={onCheck} />
   );
-  expect(screen.getByLabelText("This is a pending todo").id).toBe("completed");
+
+  const checkbox = getByRole("checkbox");
+  const label = getByText("Pending todo");
+  expect(label).toContainElement(checkbox);
+  expect(checkbox).toBeInTheDocument();
+  expect(checkbox).not.toBeChecked();
+
+  fireEvent.click(checkbox);
+  expect(onCheck).toBeCalled();
+});
+
+test("Completed <Todo />", () => {
+  const { getByRole, getByText } = render(
+    <Todo todo={completedTodo} onCheck={onCheck} />
+  );
+
+  const checkbox = getByRole("checkbox");
+  const label = getByText("Completed todo");
+  expect(label).toContainElement(checkbox);
+  expect(checkbox).toBeInTheDocument();
+  expect(checkbox).toBeChecked();
+
+  fireEvent.click(checkbox);
+  expect(onCheck).toBeCalled();
 });
