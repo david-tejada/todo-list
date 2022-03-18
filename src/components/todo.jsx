@@ -5,10 +5,10 @@ export default function Todo({ todo, onCheck }) {
   const className = completed ? "todo todo-completed" : "todo";
   return (
     <li className={className}>
-      <label htmlFor="completed">
+      <label htmlFor={id}>
         <input
           type="checkbox"
-          id="completed"
+          id={id}
           todo={todo}
           checked={completed}
           onChange={() => {

@@ -7,12 +7,7 @@ export default class Filter extends React.Component {
   }
 
   handleChange(event) {
-    console.log(event);
     this.props.onFilterChange(event.target.value);
-  }
-
-  componentDidMount() {
-    console.log(this);
   }
 
   render() {
@@ -32,6 +27,7 @@ export default class Filter extends React.Component {
           id="filterPending"
           name="filter"
           value="pending"
+          checked={this.props.activeFilter === "pending"}
           onChange={this.handleChange}
         />
         <label htmlFor="filterPending">Pending</label>
@@ -40,6 +36,7 @@ export default class Filter extends React.Component {
           id="filterCompleted"
           name="filter"
           value="completed"
+          checked={this.props.activeFilter === "completed"}
           onChange={this.handleChange}
         />
         <label htmlFor="filterCompleted">Completed</label>
