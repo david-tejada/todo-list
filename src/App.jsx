@@ -1,11 +1,11 @@
 import "./App.css";
 import TodoList from "./components/todoList";
-import FilterableTodoList from "./components/filterableTodoList";
+import TodoWidget from "./components/todoWidget";
 
 const todos = [];
 
 function App() {
-  return <FilterableTodoList todos={todos} />;
+  return <TodoWidget todos={todos} />;
 }
 
 export default App;

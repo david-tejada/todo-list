@@ -2,7 +2,7 @@ import React from "react";
 import NewTodo from "./newTodo";
 import TodoList from "./todoList";
 
-export default class FilterableTodoList extends React.Component {
+export default class TodoWidget extends React.Component {
   constructor(props) {
     super(props);
     this.state = { todos: this.props.todos };

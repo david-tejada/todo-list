@@ -1,12 +1,12 @@
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
-import FilterableTodoList from "./filterableTodoList";
+import TodoWidget from "./todoWidget";
 import { todos } from "../test/fixtures";
 
 afterEach(cleanup);
 
 test("<FilterableTodoList />", () => {
   const { getByPlaceholderText, getByText, getByLabelText } = render(
-    <FilterableTodoList todos={todos} />
+    <TodoWidget todos={todos} />
   );
   const inputBox = getByPlaceholderText("Enter new todo...");
   fireEvent.change(inputBox, { target: { value: "Take the cat to walk" } });
