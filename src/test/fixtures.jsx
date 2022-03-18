@@ -9,8 +9,6 @@ const todos = [
     id: "1",
     completed: true,
   },
-  ,
-  ,
 ];
 
 export { todos };
