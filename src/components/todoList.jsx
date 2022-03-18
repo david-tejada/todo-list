@@ -22,7 +22,6 @@ export default function TodoList({ todos, onCheck }) {
         {filteredTodos?.map((todo) => (
           <Todo
             key={todo.id}
-            test="test"
             todo={todo}
             onCheck={() => {
               onCheck(todo);
