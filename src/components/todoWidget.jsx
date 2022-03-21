@@ -1,19 +1,14 @@
-import React from "react";
+import { useState } from "react";
 import NewTodo from "./newTodo";
 import TodoList from "./todoList";
 
-export default class TodoWidget extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { todos: this.props.todos };
-    this.addTodo = this.addTodo.bind(this);
-    this.handleCheckChange = this.handleCheckChange.bind(this);
-  }
+export default function TodoWidget(props) {
+  const [todos, setTodos] = useState(props.todos);
 
-  handleCheckChange(todo) {
+  function handleCheckChange(todo) {
     const id = todo.id;
-    this.setState((state) => ({
-      todos: state.todos.map((todo) => {
+    setTodos((todos) =>
+      todos.map((todo) => {
         if (todo.id == id) {
           return {
             id: todo.id,
@@ -22,25 +17,18 @@ export default class TodoWidget extends React.Component {
           };
         }
         return todo;
-      }),
-    }));
-  }
-
-  componentDidUpdate() {
-    console.log(this.state);
-  }
-
-  addTodo(todo) {
-    this.setState((state, props) => ({
-      todos: [...this.state.todos, todo],
-    }));
-  }
-  render() {
-    return (
-      <div>
-        <NewTodo onNewTodo={this.addTodo} />
-        <TodoList todos={this.state.todos} onCheck={this.handleCheckChange} />
-      </div>
+      })
     );
   }
+
+  function addTodo(todo) {
+    setTodos((todos) => [...todos, todo]);
+  }
+
+  return (
+    <div>
+      <NewTodo onNewTodo={addTodo} />
+      <TodoList todos={todos} onCheck={handleCheckChange} />
+    </div>
+  );
 }

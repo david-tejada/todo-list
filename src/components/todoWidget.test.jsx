@@ -4,7 +4,7 @@ import { todos } from "../test/fixtures";
 
 afterEach(cleanup);
 
-test("<FilterableTodoList />", () => {
+test("<TodoWidget />", () => {
   const { getByPlaceholderText, getByText, getByLabelText } = render(
     <TodoWidget todos={todos} />
   );
