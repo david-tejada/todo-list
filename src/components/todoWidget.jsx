@@ -5,8 +5,7 @@ import TodoList from "./todoList";
 export default function TodoWidget(props) {
   const [todos, setTodos] = useState(props.todos);
 
-  function handleCheckChange(todo) {
-    const id = todo.id;
+  function handleCheckChange(id) {
     setTodos((todos) =>
       todos.map((todo) => {
         if (todo.id == id) {

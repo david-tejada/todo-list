@@ -24,7 +24,7 @@ export default function TodoList({ todos, onCheck }) {
             key={todo.id}
             todo={todo}
             onCheck={() => {
-              onCheck(todo);
+              onCheck(todo.id);
             }}
           />
         ))}

@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Todo({ todo, onCheck }) {
-  const { completed, id } = todo;
+  const { content, id, completed } = todo;
   const className = completed ? "todo todo-completed" : "todo";
   return (
     <li className={className}>
@@ -9,13 +9,12 @@ export default function Todo({ todo, onCheck }) {
         <input
           type="checkbox"
           id={id}
-          todo={todo}
           checked={completed}
           onChange={() => {
-            onCheck(todo);
+            onCheck();
           }}
         />
-        {todo.content}
+        {content}
       </label>
       <button>edit</button>
     </li>
